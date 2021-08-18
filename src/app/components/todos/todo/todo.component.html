@@ -1,0 +1,26 @@
+<div class="user-card">
+    <mat-toolbar style="display: flex; justify-content: space-between; height: 80px;">
+        <span>Detalle TODO:</span>
+        <button mat-fab color="accent" class="mt-2" routerLink="/todos">Atrás</button>
+    </mat-toolbar>
+
+    <mat-card style="background-color: #DED7CC; margin-top: 20px;">
+        <mat-card-header class="p-2">
+            <mat-card-title>{{todo.title | titlecase}}</mat-card-title>
+            <mat-card-subtitle style="font-weight: bold;">ID Usuario: {{todo.userId}}</mat-card-subtitle>
+        </mat-card-header>
+
+
+        <div class="p-3 text-center" style="display: flex; justify-content: space-around;">
+            <div *ngIf="todo.completed" style="display: flex; justify-content: center; align-items: center;">
+                <span style="padding-right: 10px;">Estado: Activo</span>
+                <span class="material-icons" style="color: #40ff60;">done</span>
+            </div>
+            <div *ngIf="!todo.completed" style="display: flex; justify-content: center; align-items: center;">
+                <span style="padding-right: 10px;">Estado: Inactivo</span>
+                <span class="material-icons" style="color: #ff4081;">close</span>
+            </div>
+            <button mat-raised-button color="warn" (click)="changeState(todo)">Cambiar Estado</button>
+        </div>
+    </mat-card>
+</div>

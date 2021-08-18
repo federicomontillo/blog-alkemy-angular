@@ -1,0 +1,38 @@
+<div class="user-card" style="padding-bottom: 60px;">
+  <mat-toolbar>
+    <span>Posteos</span>
+  </mat-toolbar>
+
+  <div class="div">
+    <mat-form-field appearance="standard">
+      <mat-label>Buscar:</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Titulo o ID de usuario" autocomplete="off" #input>
+    </mat-form-field>
+
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      <ng-container matColumnDef="title">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+          <h4>Post</h4>
+        </th>
+        <td mat-cell *matCellDef="let post" class="p-3">
+          <a style="color: #ff4081;">
+            {{post.title | titlecase }}
+          </a>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+        <th mat-header-cell *matHeaderCellDef> </th>
+        <td mat-cell *matCellDef="let post">
+          <button mat-raised-button color="primary" [routerLink]="['/posts/post', post.id]">Visitar Post</button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[12]" class="container"></mat-paginator>
+  </div>
+
+</div>
