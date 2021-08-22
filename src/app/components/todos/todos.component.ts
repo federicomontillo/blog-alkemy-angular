@@ -13,7 +13,8 @@ import { TodosService } from 'src/app/services/todos.service';
 export class TodosComponent implements OnInit {
 
   todos: Todos[] = [];
-  stateSelect: any;
+  userId: string = '';
+  state: any = '';
 
   displayedColumns: string[] = ['title', 'userId', 'state'];
   dataSource = new MatTableDataSource(this.todos);
@@ -28,10 +29,39 @@ export class TodosComponent implements OnInit {
     this.loadTodos();
   }
 
-  selectState(filterValue: any) {
-    this.stateSelect = filterValue;
-    this.dataSource.filter = filterValue;
-    return;
+  filterUser(event: Event) {
+    this.userId = (event.target as HTMLInputElement).value;
+    this.dataSource.filterPredicate =
+      (data: Todos, filter: any) => !filter || data.userId == filter;
+    this.dataSource.filter = this.userId;
+  }
+
+  changeState(todos: any) {
+    this.loadTodos();
+    this.todos = todos;
+    this.dataSource = new MatTableDataSource(this.todos);
+    this.dataSource.paginator = this.paginator;
+    this.state = null;
+  }
+
+  changeStateTrue(todos: any) {
+    let todoCompl = todos.filter((todo: any) => {
+      return todo.completed;
+    });
+    this.todos = todoCompl;
+    this.dataSource = new MatTableDataSource(this.todos);
+    this.dataSource.paginator = this.paginator;
+    this.state = true;
+  }
+
+  changeStateFalse(todos: any) {
+    let todoCompl = todos.filter((todo: any) => {
+      return !todo.completed;
+    });
+    this.todos = todoCompl;
+    this.dataSource = new MatTableDataSource(this.todos);
+    this.dataSource.paginator = this.paginator;
+    this.state = false;
   }
 
   loadTodos() {
@@ -51,7 +81,6 @@ export class TodosComponent implements OnInit {
           this.dataSource.paginator = this.paginator;
         });
     }
-
   }
 }
 

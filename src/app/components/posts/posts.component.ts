@@ -15,12 +15,13 @@ export class PostsComponent implements OnInit {
 
   posts: Posts[] = [];
   userId: string = '';
+  title: string = '';
 
-  displayedColumns: string[] = ['title', 'actions'];
+  displayedColumns: string[] = ['title', 'actions', 'userId'];
   dataSource = new MatTableDataSource(this.posts);
 
+
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
 
   constructor(private postServices: PostsService,
     private activateRoute: ActivatedRoute,) { }
@@ -32,8 +33,8 @@ export class PostsComponent implements OnInit {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
-    this.userId = filterValue.trim().toLowerCase();
   }
+
 
   loadPosts() {
     const userId = this.activateRoute.snapshot.paramMap.get('id');
@@ -43,7 +44,6 @@ export class PostsComponent implements OnInit {
           this.posts = resp;
           this.dataSource = new MatTableDataSource(this.posts);
           this.dataSource.paginator = this.paginator;
-          this.dataSource.sort = this.sort;
         });
     } else {
       this.postServices.getPosts()
@@ -51,7 +51,6 @@ export class PostsComponent implements OnInit {
           this.posts = resp;
           this.dataSource = new MatTableDataSource(this.posts);
           this.dataSource.paginator = this.paginator;
-          this.dataSource.sort = this.sort;
         });
     }
   }
