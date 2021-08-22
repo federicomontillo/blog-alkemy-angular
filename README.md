@@ -10,5 +10,4 @@ It was used:
 - Dynamic Loading of the NavBar and Footer.
 
 
-[Ir al Sitio](https://awesome-wright-cf12c4.netlify.app/)
 
