@@ -6,7 +6,7 @@
   <div class="div">
     <mat-form-field appearance="standard">
       <mat-label>Buscar:</mat-label>
-      <input matInput (keyup)="applyFilter($event)" placeholder="Titulo o ID de usuario" autocomplete="off" #input>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Buscar por Titulo" autocomplete="off" #input>
     </mat-form-field>
 
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
@@ -20,17 +20,6 @@
           </a>
         </td>
       </ng-container>
-
-        <ng-container matColumnDef="userId">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>
-            <h4>UserId</h4>
-          </th>
-          <td mat-cell *matCellDef="let post" class="p-3">
-            <a style="color: #ff4081;">
-              {{post.userId}}
-            </a>
-          </td>
-        </ng-container>
 
       <ng-container matColumnDef="actions">
         <th mat-header-cell *matHeaderCellDef mat-sort-header></th>

@@ -4,7 +4,6 @@ import { MatPaginator } from '@angular/material/paginator';
 import { ActivatedRoute } from '@angular/router';
 import { Posts } from 'src/app/models/post';
 import { PostsService } from 'src/app/services/posts.service';
-import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-posts',
@@ -17,7 +16,7 @@ export class PostsComponent implements OnInit {
   userId: string = '';
   title: string = '';
 
-  displayedColumns: string[] = ['title', 'actions', 'userId'];
+  displayedColumns: string[] = ['title', 'actions'];
   dataSource = new MatTableDataSource(this.posts);
 
 
